@@ -10,7 +10,7 @@ const Cart = () => {
   };
   return (
     <div className="cartIcon">
-      <h3 onClick={showCart}>Cart Items</h3>
+      <h3 onClick={showCart}>{totalQuantity} Cart Items</h3>
     </div>
   );
 };

@@ -10,6 +10,7 @@ let firstRender =true;
 
 function App() {
   const cart = useSelector(state=> state.cart);
+  console.log(cart);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
   const notification = useSelector(state => state.ui.notification)
@@ -42,16 +43,18 @@ function App() {
   }
   }
   useEffect(()=>{
-    dispatch(fetchData())
-  },[dispatch])
-  useEffect(()=>{
     if(firstRender){
       firstRender =false;
       return
     }
+    dispatch(fetchData())
+  },[dispatch])
+  useEffect(()=>{
+    if(cart.changed){
       sendRequest()
+    }
     
-  },[cart])
+  },[cart,dispatch])
   return (
     <div className="App">
       {notification && <Notification type={notification.type} message={notification.message}/>}

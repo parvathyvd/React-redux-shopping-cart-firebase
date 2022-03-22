@@ -4,10 +4,11 @@ import { uiActions } from "./ui-slice";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    itemsList: [],
-    totalQuantity: 0,
+    itemsList:[],
     showCart: false,
-    changed: false,
+    changed: true,
+    totalQuantity: 0,
+    changed: false
   },
   reducers: {
     replaceData(state, action) {
@@ -15,7 +16,7 @@ const cartSlice = createSlice({
       state.itemsList = action.payload.itemsList;
     },
     addToCart(state, action) {
-      state.changed = true;
+       state.changed = true;
       const newItem = action.payload;
       // to check if item is already available
       const existingItem = state.itemsList.find(
@@ -42,7 +43,7 @@ const cartSlice = createSlice({
 
       const existingItem = state.itemsList.find((item) => item.id === id);
       if (existingItem.quantity === 1) {
-        state.itemsList = state.itemsList.filter((item) => item.id != id);
+        state.itemsList = state.itemsList.filter((item) => item.id !== id);
         state.totalQuantity--;
       } else {
         existingItem.quantity--;
